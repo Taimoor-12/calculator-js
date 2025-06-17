@@ -9,6 +9,7 @@ body {
 .container {
   background-color: black;
   opacity: 0.8;
+  width: 335px;
   height: 600px;
   border-radius: 10px;
 
@@ -26,11 +27,28 @@ body {
   gap: 20px;
 }
 
-.container .output {
+.output {
   height: 20%;
 
   background-color: white;
   margin-top: 20px;
+
+  display: flex;
+  align-items: flex-end;
+  direction: rtl;
+
+  font-size: 36px;
+  padding-bottom: 5%;
+  padding-right: 5%;
+
+
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.output::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .reset-btn-container {
