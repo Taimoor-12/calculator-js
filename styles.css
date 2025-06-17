@@ -47,6 +47,12 @@ button {
   font-size: 22px;
 }
 
+button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
 .reset-btn-container *:first-child,
 .reset-btn-container *:last-child {
   height: 60px;
@@ -82,4 +88,10 @@ button {
 .main-btn-container div {
   display: flex;
   gap: 20px;
+}
+
+.main-btn-container div button:last-child,
+.main-btn-container div:last-child button:nth-last-child(2) {
+  background-color: orange;
+  color: white; 
 }
