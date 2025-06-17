@@ -62,14 +62,26 @@ body {
   background-color: yellowgreen;
 }
 
+.main-btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .main-btn-container button {
   border: none;
   border-radius: 50%;
   width: 70px;
   height: 60px;
+
+  cursor: pointer;
+  color: black;
+  font-weight: 400;
+  font-size: 22px;;
+
 }
 
-.first-row {
+.main-btn-container div {
   display: flex;
   gap: 20px;
 }
