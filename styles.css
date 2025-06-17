@@ -18,10 +18,47 @@ body {
   align-items: center;
 }
 
-.container .output {
+.content-wrapper {
   width: 90%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container .output {
   height: 20%;
 
   background-color: white;
   margin-top: 20px;
+}
+
+.reset-btn-container {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.reset-btn-container *:first-child,
+.reset-btn-container *:last-child {
+  border: none;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white ;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.reset-btn-container *:first-child {
+  background-color: red;
+}
+
+.reset-btn-container *:last-child {
+  background-color: yellowgreen;
 }
