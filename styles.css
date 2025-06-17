@@ -62,3 +62,9 @@ body {
 .reset-btn-container *:last-child {
   background-color: yellowgreen;
 }
+
+.main-btn-container button {
+  border: none;
+  border-radius: 50%;
+  height: 60px;
+}
