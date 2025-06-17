@@ -39,19 +39,22 @@ body {
   justify-content: flex-end;
 }
 
-.reset-btn-container *:first-child,
-.reset-btn-container *:last-child {
+button {
   border: none;
   border-radius: 50%;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.reset-btn-container *:first-child,
+.reset-btn-container *:last-child {
   height: 60px;
   width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   color: white ;
-  font-weight: 400;
-  font-size: 22px;
 }
 
 .reset-btn-container *:first-child {
@@ -69,16 +72,11 @@ body {
 }
 
 .main-btn-container button {
-  border: none;
-  border-radius: 50%;
   width: 70px;
   height: 60px;
 
   cursor: pointer;
   color: black;
-  font-weight: 400;
-  font-size: 22px;;
-
 }
 
 .main-btn-container div {
