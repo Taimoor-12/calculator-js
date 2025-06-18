@@ -23,3 +23,29 @@ const operate = (num1, num2, operator) => {
       break;
   }
 }
+
+const contentWrapper = document.querySelector('.content-wrapper');
+const output = document.querySelector('.output');
+
+contentWrapper.addEventListener('click', e => {
+  if (e.target.nodeName !== 'BUTTON') return;
+
+  const value = e.target.value;
+
+  if (value === 'AC') {
+    output.textContent = '';
+  } else if (value === 'DEL') {
+    if (output.lastChild) output.removeChild(output.lastChild);
+  } else {
+    const operators = ['+', '-', '/', '*'];
+
+    if (
+      output.lastChild &&
+      operators.includes(output.lastChild.textContent) &&
+      operators.includes(value)
+    ) return;
+
+    const content = document.createTextNode(value);
+    output.appendChild(content);
+  }
+});
