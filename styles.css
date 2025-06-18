@@ -36,7 +36,9 @@ body {
   display: flex;
   align-items: flex-end;
   direction: rtl;
+  unicode-bidi: plaintext;
 
+  white-space: nowrap;
   font-size: 36px;
   padding-bottom: 5%;
   padding-right: 5%;
