@@ -67,6 +67,21 @@ contentWrapper.addEventListener('click', e => {
   } else if (value === '=') {
     if (!operand1 || !operand2 || !operator) return;
     prepareOperation();
+  } else if (value === '.') {
+    if (chars.length === 0) return;
+
+    const hasOperator = chars.some(char => operators.has(char));
+
+    if (hasOperator && operand2 && !operand2.includes('.')) {
+      operand2 += value;
+    } else if (!hasOperator && operand1 && !operand1.includes('.')) {
+      operand1 += value;
+    } else {
+      return;
+    }
+
+    chars.push(value);
+    output.textContent = chars.join('');
   } else {
     let chars = output.textContent.split('');
     if ((operand1 && operand2 && operator) && operators.has(value)) {
