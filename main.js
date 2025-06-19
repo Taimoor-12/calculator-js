@@ -12,20 +12,20 @@ let result = 0;
 const operate = (num1, num2, operator) => {
   switch (operator) {
     case '+':
-      result = add(num1, num2);
+      result = add(num1, num2).toFixed(2);
       break;
     case '-':
-      result = subtract(num1, num2);
+      result = subtract(num1, num2).toFixed(2);
       break;
     case '*':
-      result = multiply(num1, num2);
+      result = multiply(num1, num2).toFixed(2);
       break;
     case '/':
       if (num2 === 0) {
         alert('You cannot divide with zero!');
         return;
       }
-      result = divide(num1, num2);
+      result = divide(num1, num2).toFixed(2);
       break;
   }
 }
