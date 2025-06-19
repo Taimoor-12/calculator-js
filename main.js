@@ -33,14 +33,16 @@ const operate = (num1, num2, operator) => {
   result = Number.isInteger(answer) ? answer : answer.toFixed(2);
 }
 
+
 const contentWrapper = document.querySelector('.content-wrapper');
 const output = document.querySelector('.output');
+
+const operators = new Set(['+', '-', '/', '*']);
 
 contentWrapper.addEventListener('click', e => {
   if (e.target.nodeName !== 'BUTTON') return;
 
   const value = e.target.value;
-  const operators = new Set(['+', '-', '/', '*']);
   let chars = output.textContent.split('');
 
   if (value === 'AC') {
@@ -50,20 +52,7 @@ contentWrapper.addEventListener('click', e => {
     operator = '';
     result = 0;
   } else if (value === 'DEL') {
-    const char = chars.pop();
-    if (operators.has(char)) {
-      operator = '';
-    } else if (chars.some(char => operators.has(char))) {
-      const operand2Arr = operand2.split('');
-      operand2Arr.pop();
-      operand2 = operand2Arr.join('');
-    } else {
-      const operand1Arr = operand1.split('');
-      operand1Arr.pop();
-      operand1 = operand1Arr.join('');
-    }
-
-    output.textContent = chars.join('');
+    removeFromOutput(chars);
   } else if (value === '=') {
     if (!operand1 || !operand2 || !operator) return;
     prepareOperation();
@@ -123,6 +112,14 @@ contentWrapper.addEventListener('click', e => {
   
 });
 
+document.addEventListener('keydown', e => {
+  let chars = output.textContent.split('');
+
+  if (e.key === 'Backspace') {
+    removeFromOutput(chars);
+  }
+});
+
 const prepareOperation = () => {
   operate(Number(operand1), Number(operand2), operator);
   const resultString = String(result);
@@ -130,4 +127,21 @@ const prepareOperation = () => {
   operand2 = '';
   operator = ''
   output.textContent = resultString;
+}
+
+const removeFromOutput = (chars) => {
+  const char = chars.pop();
+  if (operators.has(char)) {
+    operator = '';
+  } else if (chars.some(char => operators.has(char))) {
+    const operand2Arr = operand2.split('');
+    operand2Arr.pop();
+    operand2 = operand2Arr.join('');
+  } else {
+    const operand1Arr = operand1.split('');
+    operand1Arr.pop();
+    operand1 = operand1Arr.join('');
+  }
+
+  output.textContent = chars.join('');
 }
