@@ -10,24 +10,27 @@ let operator = '';
 let result = 0;
 
 const operate = (num1, num2, operator) => {
+  let answer = 0;
   switch (operator) {
     case '+':
-      result = add(num1, num2).toFixed(2);
+      answer = add(num1, num2);
       break;
     case '-':
-      result = subtract(num1, num2).toFixed(2);
+      answer = subtract(num1, num2);
       break;
     case '*':
-      result = multiply(num1, num2).toFixed(2);
+      answer = multiply(num1, num2);
       break;
     case '/':
       if (num2 === 0) {
         alert('You cannot divide with zero!');
         return;
       }
-      result = divide(num1, num2).toFixed(2);
+      answer = divide(num1, num2);
       break;
   }
+
+  result = Number.isInteger(answer) ? answer : answer.toFixed(2);
 }
 
 const contentWrapper = document.querySelector('.content-wrapper');
@@ -94,7 +97,7 @@ contentWrapper.addEventListener('click', e => {
       operand2 += value;
     }
 
-    if (chars.length === 1 && chars[0] === '0') {
+    if (chars.length === 1 && chars[0] === '0' && !operators.has(value)) {
       output.textContent = value;
       return;
     }
@@ -106,7 +109,7 @@ contentWrapper.addEventListener('click', e => {
 });
 
 const prepareOperation = () => {
-  operate(parseInt(operand1), parseInt(operand2), operator);
+  operate(Number(operand1), Number(operand2), operator);
   const resultString = String(result);
   operand1 = resultString;
   operand2 = '';
