@@ -23,7 +23,7 @@ const operate = (num1, num2, operator) => {
       break;
     case "/":
       if (num2 === 0) {
-        alert("You cannot divide with zero!");
+        setTimeout(() => alert("You cannot divide with zero!"), 100);
         return;
       }
       answer = divide(num1, num2);
@@ -61,17 +61,7 @@ contentWrapper.addEventListener("click", (e) => {
 const numberKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
 document.addEventListener("keydown", (e) => {
-  let buttonValue = "";
-  if (e.key === "Backspace") {
-    buttonValue = "DEL";
-  } else if (e.key === "Escape") {
-    buttonValue = "AC";
-  } else {
-    buttonValue = e.key;
-  }
-
-  const button = document.querySelector(`button[value="${buttonValue}"]`);
-  if (button) button.classList.add("pressed");
+  togglePressedCSSClass(e);
 
   const value = e.key;
 
@@ -92,17 +82,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 document.addEventListener("keyup", (e) => {
-  let buttonValue = "";
-  if (e.key === "Backspace") {
-    buttonValue = "DEL";
-  } else if (e.key === "Escape") {
-    buttonValue = "AC";
-  } else {
-    buttonValue = e.key;
-  }
-
-  const button = document.querySelector(`button[value="${buttonValue}"]`);
-  if (button) button.classList.remove("pressed");
+  togglePressedCSSClass();
 });
 
 const prepareOperation = () => {
@@ -190,3 +170,18 @@ const handleDecimalInput = (chars, value) => {
   chars.push(value);
   output.textContent = chars.join("");
 };
+
+const togglePressedCSSClass = (e) => {
+  const buttonValue = isBackSpace(e) ? "DEL" : isEscape(e) ? "AC" : e.key;
+
+  const button = document.querySelector(`button[value="${buttonValue}"]`);
+  if (button) button.classList.toggle("pressed");
+};
+
+const isBackSpace = (e) => {
+  return e.key === "Backspace";
+}
+
+const isEscape = (e) => {
+  return e.key === "Escape";
+}
