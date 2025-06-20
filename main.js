@@ -61,7 +61,20 @@ contentWrapper.addEventListener("click", (e) => {
 const numberKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
 document.addEventListener("keydown", (e) => {
+  let buttonValue = "";
+  if (e.key === "Backspace") {
+    buttonValue = "DEL";
+  } else if (e.key === "Escape") {
+    buttonValue = "AC";
+  } else {
+    buttonValue = e.key;
+  }
+
+  const button = document.querySelector(`button[value="${buttonValue}"]`);
+  if (button) button.classList.add("pressed");
+
   const value = e.key;
+
   let chars = output.textContent.split("");
 
   if (value === "Escape") {
@@ -76,6 +89,20 @@ document.addEventListener("keydown", (e) => {
   } else if (numberKeys.includes(value) || operators.includes(value)) {
     handleArithmeticInput(chars, value);
   }
+});
+
+document.addEventListener("keyup", (e) => {
+  let buttonValue = "";
+  if (e.key === "Backspace") {
+    buttonValue = "DEL";
+  } else if (e.key === "Escape") {
+    buttonValue = "AC";
+  } else {
+    buttonValue = e.key;
+  }
+
+  const button = document.querySelector(`button[value="${buttonValue}"]`);
+  if (button) button.classList.remove("pressed");
 });
 
 const prepareOperation = () => {
@@ -138,7 +165,7 @@ const handleArithmeticInput = (chars, value) => {
   } else {
     operand2 += value;
   }
-  
+
   if (chars.length === 1 && chars[0] === "0" && !operators.includes(value)) {
     output.textContent = value;
     return;
