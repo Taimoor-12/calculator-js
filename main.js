@@ -36,7 +36,7 @@ const operate = (num1, num2, operator) => {
 const contentWrapper = document.querySelector(".content-wrapper");
 const output = document.querySelector(".output");
 
-const operators = new Set(["+", "-", "/", "*"]);
+const operators = ["+", "-", "/", "*"];
 
 contentWrapper.addEventListener("click", (e) => {
   if (e.target.nodeName !== "BUTTON") return;
@@ -73,7 +73,7 @@ document.addEventListener("keydown", (e) => {
     prepareOperation();
   } else if (value === ".") {
     handleDecimalInput(chars, value);
-  } else if (numberKeys.includes(value) || operators.has(value)) {
+  } else if (numberKeys.includes(value) || operators.includes(value)) {
     handleArithmeticInput(chars, value);
   }
 });
@@ -89,9 +89,9 @@ const prepareOperation = () => {
 
 const removeFromOutput = (chars) => {
   const char = chars.pop();
-  if (operators.has(char)) {
+  if (operators.includes(char)) {
     operator = "";
-  } else if (chars.some((char) => operators.has(char))) {
+  } else if (chars.some((char) => operators.includes(char))) {
     const operand2Arr = operand2.split("");
     operand2Arr.pop();
     operand2 = operand2Arr.join("");
@@ -113,7 +113,7 @@ const resetData = () => {
 };
 
 const handleArithmeticInput = (chars, value) => {
-  if (operand1 && operand2 && operator && operators.has(value)) {
+  if (operand1 && operand2 && operator && operators.includes(value)) {
     prepareOperation();
     operator = value;
     output.textContent += value;
@@ -121,9 +121,9 @@ const handleArithmeticInput = (chars, value) => {
   }
 
   // we don't want an operator showing when there are no operands.
-  if (!operand1 && operators.has(value)) return;
+  if (!operand1 && operators.includes(value)) return;
 
-  if (operator && operators.has(value)) {
+  if (operator && operators.includes(value)) {
     chars.pop();
     chars.push(value);
     operator = value;
@@ -131,15 +131,15 @@ const handleArithmeticInput = (chars, value) => {
     return;
   }
 
-  if (operators.has(value)) {
+  if (operators.includes(value)) {
     operator = value;
   } else if (!operator) {
     operand1 += value;
   } else {
     operand2 += value;
   }
-
-  if (chars.length === 1 && chars[0] === "0" && !operators.has(value)) {
+  
+  if (chars.length === 1 && chars[0] === "0" && !operators.includes(value)) {
     output.textContent = value;
     return;
   }
@@ -150,7 +150,7 @@ const handleArithmeticInput = (chars, value) => {
 const handleDecimalInput = (chars, value) => {
   if (chars.length === 0) return;
 
-  const hasOperator = chars.some((char) => operators.has(char));
+  const hasOperator = chars.some((char) => operators.includes(char));
 
   if (hasOperator && operand2 && !operand2.includes(".")) {
     operand2 += value;
